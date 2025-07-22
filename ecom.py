@@ -15,24 +15,22 @@ def binary(ecom):
     
 	while low <= high:
 		mid = (low + high) // 2
-		print(f"CURRENT MIN INDEX IS: {mid}")
+		print(f"CURRENT MID INDEX IS: {mid}")
 
-	if ecom[mid] == key:
-		print("ELEMENT FOUND AT INDEX", mid)
-		return mid
-		break
-	elif ecom[mid] < key:
-		print("ELEMENT IS FOUND ")
-		low = mid + 1
-		break
-	elif ecom[mid] < key :
-		print("ELEMENT IS FOUND ")
-		high = mid - 1
-		break
-	else:
+		if ecom[mid] == key:
+			print("ELEMENT FOUND AT INDEX", mid)
+			return mid
+
+		elif ecom[mid] < key:
+			print("SEARCHING AT RIGHT SIDE ")
+			low = mid + 1
+
+		else:
+			print("SEARCHING AT LEFT SIDE")
+			high = mid - 1
+
 		print("ELEMENT NOT FOUND")
 		return -1
-		break
 
 
 
