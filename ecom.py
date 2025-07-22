@@ -1,16 +1,38 @@
-def linear(ecom):
+def linear(ecom,a):
 	key = int(input("ENTER THE ELEMENT WHICH IS TO BE SEARCH :"))
-	for i in range(len(ecom)):
-		if key == ecom[i]:
+	for i in range(a):
+		if key in ecom :
 			print("ELEMENT FOUND")
+			break
 		else:
 			print("ELEMENT NOT FOUND")		
-			break	
+			break
 def binary(ecom):
-	pass	
+	key = int(input("ENTER THE ELEMENT WHICH IS TO BE SEARCHED: "))
+    
+	low = 0
+	high = len(ecom) - 1
+    
+	while low <= high:
+		mid = (low + high) // 2
+		print(f"CURRENT MIN INDEX IS: {mid}")
 
-
-
+	if ecom[mid] == key:
+		print("ELEMENT FOUND AT INDEX", mid)
+		return mid
+		break
+	elif ecom[mid] < key:
+		print("ELEMENT IS FOUND ")
+		low = mid + 1
+		break
+	elif ecom[mid] < key :
+		print("ELEMENT IS FOUND ")
+		high = mid - 1
+		break
+	else:
+		print("ELEMENT NOT FOUND")
+		return -1
+		break
 
 
 
