@@ -1,7 +1,8 @@
 def selection(com):
-	for i in range(len(com)):
+	n = len(com)
+	for i in range(n):
 		min_index = i
-		for j in range(i+1, len(com)):
+		for j in range(i+1, n):
 			if com[j] < com[min_index]:
 				min_index = j
 		com[i], com[min_index] = com[min_index], com[i]
@@ -9,10 +10,10 @@ def selection(com):
 	print("\nSORTED SALARIES (SELECTION SORT):", com)
     
 	print("TOP 5 HIGHEST SALARIES:")
-	top_five = com[-5:]
-	top_five.reverse()
-	for salary in top_five:
-		print(salary)
+	a = len(com)
+	for salary in range(n-1, n-6,-1):
+		print(com[salary])
+
 	
 def bubble(com):
 	n = len(com)
@@ -24,10 +25,9 @@ def bubble(com):
 	print("\nSORTED SALARIES (BUBBLE SORT):", com)
     
 	print("TOP 5 HIGHEST SALARIES:")
-	top_five =com[-5:]
-	top_five.reverse()
-	for salary in top_five:
-		print(salary)
+	a = len(com)
+	for salary in range(n-1, n-6,-1):
+		print(com[salary])
 
 
 
