@@ -10,7 +10,6 @@ def selection(com):
 	print("\nSORTED SALARIES (SELECTION SORT):", com)
     
 	print("TOP 5 HIGHEST SALARIES:")
-	a = len(com)
 	for salary in range(n-1, n-6,-1):
 		print(com[salary])
 
@@ -25,12 +24,11 @@ def bubble(com):
 	print("\nSORTED SALARIES (BUBBLE SORT):", com)
     
 	print("TOP 5 HIGHEST SALARIES:")
-	a = len(com)
 	for salary in range(n-1, n-6,-1):
 		print(com[salary])
 
 
-
+#-------------------------------------------------------------------------------------------------------------------------------------------
 #main program
 com = []
 n = int(input("ENTER TOTAL NUMBER OF EMPLOYEE: "))
