@@ -39,7 +39,8 @@ for i in range(n):
 		com.append(a)
 
 print(com)
-
+print("******************PRACTICAL NO-01(A-3) LIBRARY INFORMATION**********************")
+print("*********************Prepared By : Gaurav B. Navghare ***************************")
 
 while True:
 	print("""\n************** E-COMMERCE SYSTEM ****************
