@@ -1,45 +1,41 @@
-# ---------------------------- UNDO/REDO TEXT EDITOR -----------------------------
-
-# Global variables
-document_state = ""
-undo_stack = []
-redo_stack = []
-
-def make_change():
-    global document_state, undo_stack, redo_stack
-    new_text = input("ENTER NEW DOCUMENT TEXT: ")
-    undo_stack.append(document_state)
-    document_state = new_text
-    redo_stack.clear()
+def change(doc, u_stk, r_stk):
+    new_txt = input("ENTER NEW DOCUMENT TEXT: ")
+    u_stk.append(doc)
+    doc = new_txt
+    r_stk.clear()
     print("\nCHANGE SAVED.")
+    return doc
 
-def undo():
-    global document_state, undo_stack, redo_stack
-    if not undo_stack:
+def undo(doc, u_stk, r_stk):
+    if len(u_stk) == 0:
         print("\nNOTHING TO UNDO.")
-        return
-    redo_stack.append(document_state)
-    document_state = undo_stack.pop()
-    print("\nUNDO SUCCESSFUL.")
+    else:
+        r_stk.append(doc)
+        doc = u_stk.pop()
+        print("\nUNDO SUCCESSFUL.")
+    return doc
 
-def redo():
-    global document_state, undo_stack, redo_stack
-    if not redo_stack:
+def redo(doc, u_stk, r_stk):
+    if len(r_stk) == 0:
         print("\nNOTHING TO REDO.")
-        return
-    undo_stack.append(document_state)
-    document_state = redo_stack.pop()
-    print("\nREDO SUCCESSFUL.")
+    else:
+        u_stk.append(doc)
+        doc = r_stk.pop()
+        print("\nREDO SUCCESSFUL.")
+    return doc
 
-def display():
-    global document_state
+def show(doc):
     print("\nCURRENT DOCUMENT STATE:")
-    print(f'"{document_state}"')
+    print(f'"{doc}"')
 
 # ------------------------------------------------------------------------------
 # Main Program
-print("****************** PRACTICAL NO-01(A-4) TEXT EDITOR ************************")
+print("****************** PRACTICAL NO-01(B-1) TEXT EDITOR ************************")
 print("********************* Prepared By : Gaurav B. Navghare **********************")
+
+doc = ""
+u_stk = []
+r_stk = []
 
 while True:
     print("""
@@ -50,22 +46,19 @@ while True:
     4. DISPLAY DOCUMENT
     5. EXIT
 """)
-    try:
-        ch = int(input("ENTER YOUR CHOICE: "))
-    except ValueError:
-        print("INVALID INPUT! PLEASE ENTER A NUMBER.")
-        continue
+    ch = input("ENTER YOUR CHOICE: ")
 
-    if ch == 1:
-        make_change()
-    elif ch == 2:
-        undo()
-    elif ch == 3:
-        redo()
-    elif ch == 4:
-        display()
-    elif ch == 5:
+    if ch == "1":
+        doc = change(doc, u_stk, r_stk)
+    elif ch == "2":
+        doc = undo(doc, u_stk, r_stk)
+    elif ch == "3":
+        doc = redo(doc, u_stk, r_stk)
+    elif ch == "4":
+        show(doc)
+    elif ch == "5":
         print("THANK YOU! GOODBYE.")
         break
     else:
-        print("INVALID CHOICE! PLEASE TRY AGAIN.")
+        print("INVALID CHOICE! PLEASE ENTER BETWEEN 1 TO 5.")
+
