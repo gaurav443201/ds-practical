@@ -1,55 +1,38 @@
-from collections import deque
 
-# Global event queue and set of event IDs
-event_queue = deque()
-event_ids = set()
 
-def add_event():
-    event_id = input("ENTER EVENT ID: ")
-    if event_id in event_ids:
+def add(event_id):
+    if event_id in queue:
         print(f"EVENT WITH ID {event_id} ALREADY EXISTS IN QUEUE.")
-        return
-    description = input("ENTER EVENT DESCRIPTION: ")
-    event = {'id': event_id, 'desc': description}
-    event_queue.append(event)
-    event_ids.add(event_id)
-    print(f"ADDED: EVENT(ID={event_id}, DESC={description})")
+    else:
+        queue.append(event_id)
+        print(f"ADDED: EVENT ID {event_id}")
 
-def process_next_event():
-    if not event_queue:
+def process():
+    if not queue:
         print("NO EVENTS TO PROCESS.")
-        return
-    event = event_queue.popleft()
-    event_ids.remove(event['id'])
-    print(f"PROCESSED: EVENT(ID={event['id']}, DESC={event['desc']})")
+    else:
+        event_id = queue.pop(0)
+        print(f"PROCESSED: EVENT ID {event_id}")
 
-def display_pending_events():
-    if not event_queue:
+def display():
+    if not queue:
         print("NO PENDING EVENTS.")
-        return
-    print("PENDING EVENTS:")
-    for event in event_queue:
-        print(f" - EVENT(ID={event['id']}, DESC={event['desc']})")
+    else:
+        print("PENDING EVENTS:")
+        for event_id in queue:
+            print(f" - EVENT ID {event_id}")
 
-def cancel_event():
-    event_id = input("ENTER EVENT ID TO CANCEL: ")
-    if event_id not in event_ids:
+def cancel():
+    event_id = int(input("ENTER EVENT ID TO CANCEL: "))
+    if event_id in queue:
+        queue.remove(event_id)
+        print(f"CANCELED: EVENT ID {event_id}")
+    else:
         print(f"NO PENDING EVENT WITH ID {event_id} FOUND.")
-        return
-    global event_queue
-    new_queue = deque()
-    canceled = False
-    while event_queue:
-        event = event_queue.popleft()
-        if event['id'] == event_id:
-            canceled = True
-            event_ids.remove(event_id)
-            print(f"CANCELED: EVENT(ID={event['id']}, DESC={event['desc']})")
-        else:
-            new_queue.append(event)
-    event_queue = new_queue
 
 print("WELCOME TO REAL-TIME EVENT PROCESSING SYSTEM")
+
+queue = []
 
 while True:
     print("""
@@ -60,18 +43,19 @@ while True:
 4. CANCEL AN EVENT
 5. EXIT
 """)
-    choice = input("ENTER YOUR CHOICE: ")
-    if choice == '1':
-        add_event()
-    elif choice == '2':
-        process_next_event()
-    elif choice == '3':
-        display_pending_events()
-    elif choice == '4':
-        cancel_event()
-    elif choice == '5':
+    ch = int(input("ENTER YOUR CHOICE: "))
+    
+    if ch == 1:
+        event_id = int(input("ENTER EVENT ID: "))
+        add(event_id)
+    elif ch == 2:
+        process()
+    elif ch == 3:
+        display()
+    elif ch == 4:
+        cancel()
+    elif ch == 5:
         print("THANK YOU FOR USING THE SYSTEM. GOODBYE!")
         break
     else:
-        print("INVALID CHOICE. PLEASE ENTER 1-5.")
-
+        print("INVALID CHOICE. PLEASE ENTER A NUMBER BETWEEN 1 AND 5.")
