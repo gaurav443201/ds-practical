@@ -1,4 +1,6 @@
-hash_table = [[] for _ in range(10)]
+hash_table = []
+for _ in range(10):
+    hash_table.append([])
 
 def hash_function(key):
     return key % 10
@@ -64,3 +66,4 @@ while True:
         break
     else:
         print("Invalid choice! Try again.")
+
