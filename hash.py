@@ -25,11 +25,13 @@ def search(key):
 
 def delete(key):
     index = hash_function(key)
-    for i, item in enumerate(hash_table[index]):
-        if item[0] == key:
+    i = 0
+    while i < len(hash_table[index]):
+        if hash_table[index][i][0] == key:
             hash_table[index].pop(i)
             print(f"Key {key} deleted from index {index}")
             return
+        i += 1
     print(f"Key {key} not found for deletion")
 
 def display():
@@ -66,4 +68,3 @@ while True:
         break
     else:
         print("Invalid choice! Try again.")
-
